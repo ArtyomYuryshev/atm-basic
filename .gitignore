@@ -7,3 +7,7 @@
 **/report
 **/node_modules
 **/lib
+
+# Mac OS
+.DS_Store
+.svn
