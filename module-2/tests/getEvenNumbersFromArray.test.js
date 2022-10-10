@@ -35,7 +35,7 @@ describe('getEvenNumbersFromArray', function () {
       validator.getEvenNumbersFromArray('"4"');
     }).to.throw('["4"] is not an array of "Numbers"');
   });
-  
+
   it('should throw an error when provided a null', function () {
     expect(() => {
       validator.getEvenNumbersFromArray(null);
@@ -50,7 +50,7 @@ describe('getEvenNumbersFromArray', function () {
 
   it('should throw an error when provided an object', function () {
     expect(() => {
-      validator.getEvenNumbersFromArray({ jhon: "cena" });
+      validator.getEvenNumbersFromArray({ jhon: 'cena' });
     }).to.throw('[[object Object]] is not an array of "Numbers"');
   });
 
