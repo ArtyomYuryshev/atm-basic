@@ -50,4 +50,10 @@ describe('isNumberEven', function () {
       validator.isNumberEven({ 1: 1 });
     }).to.throw('[[object Object]] is not of type "Number" it is of type "object"');
   });
+
+  it('should throw an errow when provided with an undefined', function () {
+    expect(() => {
+      validator.isNumberEven(undefined);
+    }).to.throw('[undefined] is not of type "Number" it is of type "undefined"');
+  });
 });
