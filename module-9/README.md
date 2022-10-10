@@ -24,6 +24,7 @@ $> npm test
 Take an API service or choose the default one (https://jsonplaceholder.typicode.com/guide/)
 and write test scenarios to test each of CRUD operations:
 
+- Setup all needed toolset for the API testing
 - Create (using post() method);
 - Read (using get() method): list all resources / get a resource / filter resources;
 - Update (using put() method);

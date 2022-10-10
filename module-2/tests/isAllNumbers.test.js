@@ -13,13 +13,13 @@ describe('isNumberEven', function () {
     validator = null;
   });
 
-  it('should return true if number is even', function () {
-    expect(validator.isNumberEven(4)).to.be.equal(true);
+  it('should throw an error when provided not a array', function () {
+    expect(() => {
+      validator.isAllNumbers('lolKek');
+    }).to.throw(`[lolKek] is not an array`);
   });
 
-  it('should throw an error when provided a string', function () {
-    expect(() => {
-      validator.isNumberEven('4');
-    }).to.throw('[4] is not of type "Number" it is of type "string"');
+  it('should return true if all elements is a number', function () {
+    expect(validator.isAllNumbers([4, 8, 15, 16, 23, 42])).to.be.equal(true);
   });
 });

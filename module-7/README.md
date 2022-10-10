@@ -2,7 +2,7 @@
 
 ## Task
 
-1. Add Junit reporter to your TAF
+1. Add JUnit and Allure reporters to your test automation framework
 1. Save screenshots in case of failed test scenarios
 1. Make it possible to run your tests on Firefox browser
 

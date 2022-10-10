@@ -6,25 +6,18 @@
   "private": true,
   "scripts": {
     "test": "mocha",
-    "coverage": "c8 npm test"
+    "coverage": "c8 npm test",
+    "lint": "eslint ./ --fix"
   },
   "dependencies": {
+    "c8": "^7.12.0",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
-    "c8": "^7.12.0",
     "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "mochawesome": "^7.1.3"
+    "mocha": "^10.0.0"
   },
   "mocha": {
-    "spec": "tests/**/*.test.js",
+    "spec": "tests/*.test.js",
     "reporter": "mochawesome"
-  },
-  "c8": {
-    "check-coverage": true,
-    "branches": 80,
-    "lines": 80,
-    "functions": 80,
-    "statements": 80
   }
 }
