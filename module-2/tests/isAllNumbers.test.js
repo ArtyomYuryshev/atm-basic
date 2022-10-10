@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { describe, beforeEach, it } = require('mocha');
 const NumbersValidator = require('../app/numbers-validator');
 
-describe('isNumberEven', function () {
+describe('isAllNumbers', function () {
   let validator;
 
   beforeEach(function () {
@@ -13,13 +13,42 @@ describe('isNumberEven', function () {
     validator = null;
   });
 
-  it('should throw an error when provided not a array', function () {
+  it('should return true if all elements is a number', function () {
+    expect(validator.isAllNumbers([4, 8, 15, 16, 23, 42])).to.be.equal(true);
+  });
+
+  it('should return false if not all elements is a number', function () {
+    expect(validator.isAllNumbers([8, true, 15, 'Sixteen', null, 42])).to.be.equal(false);
+  });
+  
+
+  it('should throw an error when provided string instead of array', function () {
     expect(() => {
       validator.isAllNumbers('lolKek');
     }).to.throw(`[lolKek] is not an array`);
   });
 
-  it('should return true if all elements is a number', function () {
-    expect(validator.isAllNumbers([4, 8, 15, 16, 23, 42])).to.be.equal(true);
+  it('should throw an error when provided int instead of array', function () {
+    expect(() => {
+      validator.isAllNumbers(1234567890);
+    }).to.throw(`[1234567890] is not an array`);
+  });
+
+  it('should throw an error when provided undefined instead of array', function () {
+    expect(() => {
+      validator.isAllNumbers();
+    }).to.throw(`[undefined] is not an array`);
+  });
+
+  it('should throw an error when provided null instead of array', function () {
+    expect(() => {
+      validator.isAllNumbers(null);
+    }).to.throw(`[null] is not an array`);
+  });
+
+  it('should throw an error when provided boolean instead of array', function () {
+    expect(() => {
+      validator.isAllNumbers(true);
+    }).to.throw(`[true] is not an array`);
   });
 });

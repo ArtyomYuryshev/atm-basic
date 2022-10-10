@@ -53,7 +53,7 @@ describe('isNumberEven', function () {
 
   it('should throw an errow when provided with an undefined', function () {
     expect(() => {
-      validator.isNumberEven(undefined);
+      validator.isNumberEven();
     }).to.throw('[undefined] is not of type "Number" it is of type "undefined"');
   });
 });

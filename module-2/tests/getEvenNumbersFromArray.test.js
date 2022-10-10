@@ -56,7 +56,7 @@ describe('getEvenNumbersFromArray', function () {
 
   it('should throw an errow when provided with an undefined', function () {
     expect(() => {
-      validator.getEvenNumbersFromArray(undefined);
+      validator.getEvenNumbersFromArray();
     }).to.throw('[undefined] is not an array of "Numbers"');
   });
 });

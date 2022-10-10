@@ -55,7 +55,7 @@ describe('isInteger', function () {
 
   it('should throw an errow when provided with an undefined', function () {
     expect(() => {
-      validator.isInteger(undefined);
+      validator.isInteger();
     }).to.throw('[undefined] is not a number');
   });
 });
