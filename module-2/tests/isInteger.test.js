@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { describe, beforeEach, it } = require('mocha');
 const NumbersValidator = require('../app/numbers-validator');
 
-describe('isNumberEven', function () {
+describe('isInteger', function () {
   let validator;
 
   beforeEach(function () {
@@ -13,13 +13,49 @@ describe('isNumberEven', function () {
     validator = null;
   });
 
-  it('should throw an error when provided not a number in array', function () {
+  it('should return true if provided number is an integer ', function () {
+    expect(validator.isInteger(777)).to.be.equal(true);
+  });
+
+  it('should return true if provided array of integer ', function () {
+    expect(() => {
+      validator.isInteger([4, 8, 15, 16, 23, 42]);
+    }).to.throw('[4,8,15,16,23,42] is not a number');
+  });
+
+  it('should throw an error when provided array with not only integer', function () {
     expect(() => {
       validator.isInteger([4, 8, 15, 16, '"twenty three"', 42]);
     }).to.throw('[4,8,15,16,"twenty three",42] is not a number');
   });
 
-  it('should return true if provided number is an integer ', function () {
-    expect(validator.isInteger(777)).to.be.equal(true);
+  it('should throw an error when provided string', function () {
+    expect(() => {
+      validator.isInteger('"9007199.254740991"');
+    }).to.throw('["9007199.254740991"] is not a number');
+  });
+
+  it('should throw an error when provided a null', function () {
+    expect(() => {
+      validator.isInteger(null);
+    }).to.throw('[null] is not a number');
+  });
+
+  it('should throw an error when provided with boolean', function () {
+    expect(() => {
+      validator.isInteger(true);
+    }).to.throw('[true] is not a number');
+  });
+
+  it('should throw an errow when provided with an object', function () {
+    expect(() => {
+      validator.isInteger({ jhone: 'cena' });
+    }).to.throw('[[object Object]] is not a number');
+  });
+
+  it('should throw an errow when provided with an undefined', function () {
+    expect(() => {
+      validator.isInteger(undefined);
+    }).to.throw('[undefined] is not a number');
   });
 });
