@@ -20,7 +20,6 @@ describe('isAllNumbers', function () {
   it('should return false if not all elements is a number', function () {
     expect(validator.isAllNumbers([8, true, 15, 'Sixteen', null, 42])).to.be.equal(false);
   });
-  
 
   it('should throw an error when provided string instead of array', function () {
     expect(() => {
