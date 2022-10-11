@@ -31,7 +31,7 @@ describe('isNumberEven', function () {
 
   it('should return true if number is odd', function () {
     expect(validator.isNumberEven(Math.PI)).to.be.equal(false);
-  }); 
+  });
 
   it('should return true if number is fraction', function () {
     expect(validator.isNumberEven(1 / 2)).to.be.equal(false);
