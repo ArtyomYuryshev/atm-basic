@@ -35,7 +35,7 @@ describe('getEvenNumbersFromArray', function () {
 
   it('should throw an error when provided not an integer array', function () {
     expect(() => {
-      validator.getEvenNumbersFromArray([4, 8, 15, 16, "twenty three", 42]);
+      validator.getEvenNumbersFromArray([4, 8, 15, 16, 'twenty three', 42]);
     }).to.throw('[4,8,15,16,twenty three,42] is not an array of "Numbers"');
   });
 
