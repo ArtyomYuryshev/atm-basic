@@ -22,7 +22,7 @@ describe('isAllNumbers', function () {
   });
 
   it('should return true if provided array with irrational numbers', function () {
-    expect(validator.isAllNumbers([Math.sqrt(2), 1/2, Math.PI])).to.be.equal(true);
+    expect(validator.isAllNumbers([Math.sqrt(2), 1 / 2, Math.PI])).to.be.equal(true);
   });
 
   it('should return true if provided array with fractionl numbers', function () {
