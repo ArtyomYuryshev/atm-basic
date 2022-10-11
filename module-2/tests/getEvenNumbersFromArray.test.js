@@ -18,6 +18,21 @@ describe('getEvenNumbersFromArray', function () {
     expect(validator.getEvenNumbersFromArray(arrayOfRandomNumbers)).to.be.eql([2, 12, 32, 10]);
   });
 
+  it('should return an array of even numbers when provided only even numbers', function () {
+    const arrayOfRandomNumbers = [2, 4, 6, 8];
+    expect(validator.getEvenNumbersFromArray(arrayOfRandomNumbers)).to.be.eql([2, 4, 6, 8]);
+  });
+
+  it('should return an array of even numbers when provided only odd numbers', function () {
+    const arrayOfRandomNumbers = [3, 5, 7];
+    expect(validator.getEvenNumbersFromArray(arrayOfRandomNumbers)).to.be.eql([]);
+  });
+
+  it('should return an array of even numbers when provided only one number', function () {
+    const arrayOfRandomNumbers = [222222222];
+    expect(validator.getEvenNumbersFromArray(arrayOfRandomNumbers)).to.be.eql([222222222]);
+  });
+
   it('should throw an error when provided not an integer array', function () {
     expect(() => {
       validator.getEvenNumbersFromArray([4, 8, 15, 16, '"twenty three"', 42]);

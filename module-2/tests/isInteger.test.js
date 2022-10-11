@@ -13,11 +13,23 @@ describe('isInteger', function () {
     validator = null;
   });
 
-  it('should return true if provided number is an integer ', function () {
+  it('should return true if provided number is an integer', function () {
     expect(validator.isInteger(777)).to.be.equal(true);
   });
 
-  it('should return true if provided array of integer ', function () {
+  it('should return true if provided 0 ', function () {
+    expect(validator.isInteger(0)).to.be.equal(true);
+  });
+
+  it('should return true if provided negative ', function () {
+    expect(validator.isInteger(-12)).to.be.equal(true);
+  });
+
+  it('should return true if provided floating ', function () {
+    expect(validator.isInteger(12.12)).to.be.equal(false);
+  });
+
+  it('should throw an error when provided array of integer', function () {
     expect(() => {
       validator.isInteger([4, 8, 15, 16, 23, 42]);
     }).to.throw('[4,8,15,16,23,42] is not a number');
