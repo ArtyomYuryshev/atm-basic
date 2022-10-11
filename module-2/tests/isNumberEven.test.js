@@ -17,6 +17,26 @@ describe('isNumberEven', function () {
     expect(validator.isNumberEven(4)).to.be.equal(true);
   });
 
+  it('should return true if provided negative', function () {
+    expect(validator.isNumberEven(-2)).to.be.equal(true);
+  });
+
+  it('should return true if provided 0', function () {
+    expect(validator.isNumberEven(0)).to.be.equal(true);
+  });
+
+  it('should return true if number is irrational', function () {
+    expect(validator.isNumberEven(5)).to.be.equal(false);
+  });
+
+  it('should return true if number is odd', function () {
+    expect(validator.isNumberEven(Math.PI)).to.be.equal(false);
+  }); 
+
+  it('should return true if number is fraction', function () {
+    expect(validator.isNumberEven(1 / 2)).to.be.equal(false);
+  });
+
   it('should throw an error when provided a string', function () {
     expect(() => {
       validator.isNumberEven('4');
