@@ -17,6 +17,14 @@ describe('isInteger', function () {
     expect(validator.isInteger(777)).to.be.equal(true);
   });
 
+  it('should return true if number is fraction', function () {
+    expect(validator.isInteger(1 / 2)).to.be.equal(false);
+  });
+
+  it('should return true if provided array with irrational numbers', function () {
+    expect(validator.isInteger(Math.PI)).to.be.equal(false);
+  });
+
   it('should return true if provided 0 ', function () {
     expect(validator.isInteger(0)).to.be.equal(true);
   });

@@ -30,7 +30,7 @@ describe('isAllNumbers', function () {
   });
 
   // not sure that this should be true but as is
-  it('should return true if profided emty array', function () {
+  it('should return true if profided empty array', function () {
     expect(validator.isAllNumbers([])).to.be.equal(true);
   });
 
