@@ -1,6 +1,10 @@
-describe('Test suite', () => {
-  it('1st test: check page title', async () => {
+describe('Module 3: WebdriverIO Introduction', () => {
+
+  beforeEach(async () => {
     await browser.url('https://ej2.syncfusion.com/showcase/angular/appointmentplanner/#/dashboard');
+  });
+
+  it('1st test: check page title', async () => {
     const pageTitle = await browser.getTitle();
     console.log(pageTitle);
     expect(pageTitle).toEqual('Appointment Planner - Syncfusion Angular Components Showcase App');
@@ -39,4 +43,5 @@ describe('Test suite', () => {
     const popUpTitle = await $('div:nth-child(16)>ejs-dialog  div#_title');
     expect(await popUpTitle.getText()).toEqual('Edit Doctor');
   });
+  
 });
