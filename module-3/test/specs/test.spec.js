@@ -1,5 +1,4 @@
 describe('Module 3: WebdriverIO Introduction', () => {
-
   beforeEach(async () => {
     await browser.url('https://ej2.syncfusion.com/showcase/angular/appointmentplanner/#/dashboard');
   });
@@ -43,5 +42,4 @@ describe('Module 3: WebdriverIO Introduction', () => {
     const popUpTitle = await $('div:nth-child(16)>ejs-dialog  div#_title');
     expect(await popUpTitle.getText()).toEqual('Edit Doctor');
   });
-  
 });
