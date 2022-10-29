@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+const allure = require('allure-commandline');
+
 exports.config = {
   //
   // ====================
@@ -20,11 +23,9 @@ exports.config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./**/tests/**.test.js'],
+  specs: ['./src/**/*.js'],
   // Patterns to exclude.
-  exclude: [
-    // 'path/to/excluded/files'
-  ],
+  exclude: ['./src/**/locators.test.js', './src/**/nonE2E.spec.js'],
   //
   // ============
   // Capabilities
@@ -49,7 +50,17 @@ exports.config = {
   //
   capabilities: [
     {
+      // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+      // grid with only 5 firefox instances available you can make sure that not more than
+      // 5 instances get started at a time.
+      maxInstances: 1,
+      //
       browserName: 'chrome',
+      acceptInsecureCerts: true,
+      // If outputDir is provided WebdriverIO can capture driver session logs
+      // it is possible to configure which logTypes to include/exclude.
+      // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
+      // excludeDriverLogs: ['bugreport', 'server'],
     },
   ],
   //
@@ -59,7 +70,7 @@ exports.config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'error',
+  logLevel: 'info',
   //
   // Set specific log levels per logger
   // loggers:
@@ -99,8 +110,8 @@ exports.config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ['chromedriver'],
-
+  // services: [],
+  //
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
@@ -121,7 +132,27 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [],
+  reporters: [
+    'spec',
+    [
+      'junit',
+      {
+        outputDir: './report/jUnit',
+        outputFileFormat(options) {
+          return `results-${options.cid}.xml`;
+        },
+      },
+    ],
+    [
+      'allure',
+      {
+        outputDir: './report/allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
+  ],
+
   //
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -150,10 +181,19 @@ exports.config = {
    * @param  {String} cid      capability id (e.g 0-0)
    * @param  {[type]} caps     object containing capabilities for session that will be spawn in the worker
    * @param  {[type]} specs    specs to be run in the worker process
-   * @param  {[type]} args     object that will be merged with the main configuration once worker is initialised
+   * @param  {[type]} args     object that will be merged with the main configuration once worker is initialized
    * @param  {[type]} execArgv list of string arguments passed to the worker process
    */
   // onWorkerStart: function (cid, caps, specs, args, execArgv) {
+  // },
+  /**
+   * Gets executed just after a worker process has exited.
+   * @param  {String} cid      capability id (e.g 0-0)
+   * @param  {Number} exitCode 0 - success, 1 - fail
+   * @param  {[type]} specs    specs to be run in the worker process
+   * @param  {Number} retries  number of retries used
+   */
+  // onWorkerEnd: function (cid, exitCode, specs, retries) {
   // },
   /**
    * Gets executed just before initialising the webdriver session and test framework. It allows you
@@ -214,32 +254,9 @@ exports.config = {
    * @param {Boolean} result.passed    true if test has passed, otherwise false
    * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: async (
-  //   test,
-  //   context, {
-  //     error,
-  //     result,
-  //     duration,
-  //     passed,
-  //     retries
-  //   }
-  // ) => {
-  //   // take a screenshot anytime a test fails and throws an error
-  //   if (error) {
-  //     console.log(`Screenshot for the failed test ${test.title} is saved`);
-
-  //     const filename = test.title + ".png";
-  //     const dirPath = "./artifacts/screenshots/";
-
-  //     if (!existsSync(dirPath)) {
-  //       mkdirSync(dirPath, {
-  //         recursive: true,
-  //       });
-  //     }
-
-  //     await browser.saveScreenshot(dirPath + filename);
-  //   }
+  // afterTest: function(test, context, { error, result, duration, passed, retries }) {
   // },
+
   /**
    * Hook that gets executed after the suite has ended
    * @param {Object} suite suite details
@@ -280,8 +297,22 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete() {
+    const reportError = new Error('Could not generate Allure report');
+    const generation = allure(['generate', './report/allure-results', '--clean']);
+    return new Promise((resolve, reject) => {
+      const generationTimeout = setTimeout(() => reject(reportError), 5000);
+      // eslint-disable-next-line consistent-return
+      generation.on('exit', function (exitCode) {
+        clearTimeout(generationTimeout);
+        if (exitCode !== 0) {
+          return reject(reportError);
+        }
+        console.log('Allure report successfully generated');
+        resolve();
+      });
+    });
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session

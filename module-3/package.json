@@ -5,6 +5,16 @@
   "license": "EPAM Systems",
   "private": true,
   "scripts": {
-    "test": "wdio run ./src/configs/wdio.conf.js"
+    "test": "wdio run ./src/configs/wdio.conf.js",
+    "wdio": "wdio run ./src/configs/wdio.conf.js"
+  },
+  "devDependencies": {
+    "@wdio/allure-reporter": "^7.25.2",
+    "@wdio/cli": "^7.25.2",
+    "@wdio/junit-reporter": "^7.25.1",
+    "@wdio/local-runner": "^7.25.2",
+    "@wdio/mocha-framework": "^7.25.2",
+    "@wdio/spec-reporter": "^7.25.1",
+    "allure-commandline": "^2.18.1"
   }
 }
