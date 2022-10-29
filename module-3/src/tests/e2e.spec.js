@@ -22,9 +22,13 @@ describe('Module 3: WebdriverIO Introduction', () => {
   });
 
   it('4th test: close create doctor pop-up', async () => {
-    const popUp = await $("body > div[style='z-index: 1000; display: flex; position: fixed;']");
+    const popUp = await $("ejs-dialog[class='e-control e-dialog e-lib new-doctor-dialog e-dlg-modal e-popup e-popup-open']");
     await expect(popUp).toExist();
-    await (await $("div[class='button-container']>button[class='e-control e-btn e-lib e-normal']")).click();
+    await (
+      await $(
+        "//*[@class='e-control e-dialog e-lib new-doctor-dialog e-dlg-modal e-popup e-popup-open']//..//button[@class='e-control e-btn e-lib e-normal' and 'Cancel']",
+      )
+    ).click();
     await await expect(popUp).not.toExist();
   });
 
@@ -34,7 +38,9 @@ describe('Module 3: WebdriverIO Introduction', () => {
     await (await $('input#DoctorMobile')).setValue('1234567890');
     await (await $("input[name='Email']")).setValue('Lol@Kek.com');
     await (await $("input[name='Education']")).setValue('brodyaga');
-    await $("//*[@class='e-footer-content']//button[@class='e-control e-btn e-lib e-normal e-primary' and 'Save']").click();
+    await $(
+      "//*[@style='z-index: 1000; display: flex; position: fixed;']//button[@class='e-control e-btn e-lib e-normal e-primary' and 'Save']",
+    ).click();
     const newDoc = await $('#Specialist_8 .name');
     expect(await newDoc.getText()).toEqual('Dr. Lol Kek');
   });
