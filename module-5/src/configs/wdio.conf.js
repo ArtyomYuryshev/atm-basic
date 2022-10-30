@@ -20,7 +20,7 @@ exports.config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./**/tests/*.test.js'],
+  specs: ['./**/tests/new.test.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -59,7 +59,7 @@ exports.config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'error',
+  logLevel: 'info',
   //
   // Set specific log levels per logger
   // loggers:
@@ -121,7 +121,7 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [],
+  reporters: ['spec'],
   //
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
