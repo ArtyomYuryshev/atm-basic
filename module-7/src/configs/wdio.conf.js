@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+const allure = require('allure-commandline');
+
 const { mkdirSync, existsSync } = require('fs');
 
 exports.config = {
@@ -135,6 +138,14 @@ exports.config = {
         outputFileFormat(options) {
           return `results-${options.cid}.xml`;
         },
+      },
+    ],
+    [
+      'allure',
+      {
+        outputDir: './artifacts/allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
       },
     ],
   ],
@@ -288,8 +299,23 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+   onComplete() {
+    const reportError = new Error('Could not generate Allure report');
+    const generation = allure(['generate', './artifacts/allure-results', '--clean']);
+    return new Promise((resolve, reject) => {
+      const generationTimeout = setTimeout(() => reject(reportError), 5000);
+      // eslint-disable-next-line consistent-return
+      generation.on('exit', function (exitCode) {
+        clearTimeout(generationTimeout);
+        if (exitCode !== 0) {
+          return reject(reportError);
+        }
+        console.log('Allure report successfully generated');
+        resolve();
+      });
+    });
+  },
+
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session
