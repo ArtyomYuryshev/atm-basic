@@ -299,7 +299,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-   onComplete() {
+  onComplete() {
     const reportError = new Error('Could not generate Allure report');
     const generation = allure(['generate', './artifacts/allure-results', '--clean']);
     return new Promise((resolve, reject) => {
