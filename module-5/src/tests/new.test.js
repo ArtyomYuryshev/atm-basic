@@ -5,7 +5,7 @@ describe('Module 5: ', () => {
     await browser.execute(function (availabilityHeader) {
       availabilityHeader.style.color = '#de5285';
     }, availabilityHeader);
-    await browser.pause(3000);
+    // await browser.pause(3000);
 
     const color = await availabilityHeader.getCSSProperty('color');
     expect(color.parsed.hex).toEqual('#de5285');
@@ -28,7 +28,7 @@ describe('Module 5: ', () => {
     const symptomsRow = await $("td[aria-label='Swelling or bruising over a bone, Pain in the injured area column header Symptoms']");
 
     await symptomsRow.moveTo();
-    await browser.pause(3000);
+    // await browser.pause(3000);
     await expect(tooltip).toExist();
   });
 
