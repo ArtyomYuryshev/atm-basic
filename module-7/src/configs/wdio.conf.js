@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const allure = require('allure-commandline');
 
-const { mkdirSync, existsSync } = require('fs');
+const { mkdirSync, existsSync, rmdirSync } = require('fs');
 
 exports.config = {
   //
@@ -169,8 +169,17 @@ exports.config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+   onPrepare () {
+    // delete artifacts folder on test start
+    const dirPath = './artifacts';
+    if (existsSync(dirPath)) {
+      console.log("EXIST!!!!!");
+      rmdirSync(dirPath, {recursive: true});
+      console.log("Folder Deleted!");
+    } else {
+      console.log("Folder not exist!");
+    }
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -245,17 +254,19 @@ exports.config = {
     // take a screenshot anytime a test fails and throws an error
     if (result.error) {
       console.log(`Screenshot for the failed test ${test.title} is saved`);
+      // await browser.takeScreenshot();
 
-      const filename = test.title + '.png';
+      const timeElapsed = Date.now();
+      const today = new Date(timeElapsed);
+
+      const name = browser.capabilities.browserName + " " + test.title + " " + today.toUTCString() + '.png';
       const dirPath = './artifacts/screenshots/';
-
       if (!existsSync(dirPath)) {
         mkdirSync(dirPath, {
           recursive: true,
         });
       }
-
-      await browser.saveScreenshot(dirPath + filename);
+      await browser.saveScreenshot(dirPath + name);
     }
   },
 
