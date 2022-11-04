@@ -169,15 +169,15 @@ exports.config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-   onPrepare () {
+  onPrepare() {
     // delete artifacts folder on test start
     const dirPath = './artifacts';
     if (existsSync(dirPath)) {
-      console.log("EXIST!!!!!");
-      rmdirSync(dirPath, {recursive: true});
-      console.log("Folder Deleted!");
+      console.log('EXIST!!!!!');
+      rmdirSync(dirPath, { recursive: true });
+      console.log('Folder Deleted!');
     } else {
-      console.log("Folder not exist!");
+      console.log('Folder not exist!');
     }
   },
   /**
@@ -259,7 +259,7 @@ exports.config = {
       const timeElapsed = Date.now();
       const today = new Date(timeElapsed);
 
-      const name = browser.capabilities.browserName + " " + test.title + " " + today.toUTCString() + '.png';
+      const name = browser.capabilities.browserName + ' ' + test.title + ' ' + today.toUTCString() + '.png';
       const dirPath = './artifacts/screenshots/';
       if (!existsSync(dirPath)) {
         mkdirSync(dirPath, {
