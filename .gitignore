@@ -8,7 +8,7 @@
 **/report
 **/node_modules
 **/lib
-**/allure-report
+# **/package-lock.json
 
 # Mac OS
 .DS_Store
