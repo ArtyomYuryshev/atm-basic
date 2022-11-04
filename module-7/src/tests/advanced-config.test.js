@@ -5,13 +5,13 @@ describe('Module 7: Advanced Configuration', () => {
 
   it('should open page', async () => {
     const pageTitle = await browser.getTitle();
-    expect(pageTitle).toEqual('Appointment Planner - Syncfusion Angular Components Showcase App');
+    expect(pageTitle).toEqual('1 Appointment Planner - Syncfusion Angular Components Showcase App');
   });
 
   it('should open modal', async () => {
     await $("[routerlink='/doctors']").click();
     await $('.specialization-types button.e-control').click();
-    await expect($('#_dialog-content')).toBeDisplayed();
+    await expect($('#_dialog-content')).not.toBeDisplayed();
   });
 
   it('should add doctor', async () => {

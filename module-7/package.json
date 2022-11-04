@@ -6,5 +6,8 @@
   "private": true,
   "scripts": {
     "test": "wdio run ./src/configs/wdio.conf.js"
+  },
+  "devDependencies": {
+    "@wdio/allure-reporter": "^7.25.4"
   }
 }
