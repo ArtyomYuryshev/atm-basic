@@ -16,5 +16,5 @@ module.exports = {
   SpecialistCard,
   DoctorDetails,
   BreakHoursModal,
-  DeleteDocModal
+  DeleteDocModal,
 };
