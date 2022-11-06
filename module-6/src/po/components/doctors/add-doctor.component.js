@@ -25,8 +25,14 @@ class AddDoctorComponent extends BaseComponent {
       designation: 'input[name="Designation"]',
     };
 
+
     return this.rootEl.$(selectors[name.toLowerCase()]);
+  };
+
+  get emailValidation() {
+    return this.rootEl.$('label[id=Email-info]');
   }
+
 }
 
 module.exports = AddDoctorComponent;
