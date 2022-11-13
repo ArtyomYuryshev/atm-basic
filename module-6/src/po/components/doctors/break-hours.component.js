@@ -2,7 +2,7 @@ const BaseComponent = require('../common/base.component');
 
 class BreakHoursModal extends BaseComponent {
   constructor() {
-    super("div>.e-popup-open");
+    super('div>.e-popup-open');
   }
 
   get saveBtn() {
