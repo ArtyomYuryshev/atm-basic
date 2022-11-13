@@ -10,7 +10,7 @@ class AddDoctorComponent extends BaseComponent {
   }
 
   get saveBtn() {
-    return this.rootEl.$('.button-container button.e-primary');
+    return this.rootEl.$('button=Save');
   }
 
   /**
@@ -26,6 +26,10 @@ class AddDoctorComponent extends BaseComponent {
     };
 
     return this.rootEl.$(selectors[name.toLowerCase()]);
+  }
+
+  get emailValidation() {
+    return this.rootEl.$('label#Email-info');
   }
 }
 
