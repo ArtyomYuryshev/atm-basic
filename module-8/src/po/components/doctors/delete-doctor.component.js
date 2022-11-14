@@ -10,13 +10,13 @@ class DeleteDocModal extends BaseComponent {
   }
 
   get cancelBtn() {
-    return this.rootEl.$('ejs-dialog.e-popup-open button:nth-child(2)'); 
+    return this.rootEl.$('ejs-dialog.e-popup-open button:nth-child(2)');
     // i don't see the way to don't use 'nth-child(2)'
   }
 
   /**
- * @param button {'ok' | 'cancel'}
- */
+   * @param button {'ok' | 'cancel'}
+   */
   async clickButton(button) {
     if (button.toLocaleLowerCase() === 'ok') {
       await this.okBtn.click();
