@@ -10,14 +10,14 @@ class ListHeaderComponent extends BaseComponent {
   }
 
   /**
-  * @param button {'ok' | 'cancel'}
-  */
+   * @param button {'ok' | 'cancel'}
+   */
   // eslint-disable-next-line consistent-return
   async clickButton(button) {
     if (button.toLocaleLowerCase() === 'add') {
       await this.addNewDoctorBtn.click();
     } else {
-      return console.log('Provided invalid argument')
+      return console.log('Provided invalid argument');
     }
   }
 }

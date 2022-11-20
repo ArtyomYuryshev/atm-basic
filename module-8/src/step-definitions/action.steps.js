@@ -29,7 +29,7 @@ When('I enter {string} to {string} field', function (text, field) {
   return page('doctors').addDoctorModal.input(field).setValue(text);
 });
 
-When(/^I click on (\d+) doctor card name$/, function(id) {
+When(/^I click on (\d+) doctor card name$/, function (id) {
   const newDoc = page('doctors').specialistCard(id).name;
   return newDoc.click();
 });
