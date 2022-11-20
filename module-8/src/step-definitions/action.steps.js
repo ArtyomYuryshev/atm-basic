@@ -9,8 +9,8 @@ When('I click {string} link from the side menu', function (link) {
   return page('dashboard').sideMenu.item(link).click();
 });
 
-When('I click add new doctor button from list header', function () {
-  return page('doctors').doctorListHeader.addNewDoctorBtn.click();
+When('I click {string} new doctor button from list header', function (command) {
+  return page('doctors').doctorListHeader.clickButton(command);
 });
 
 When('I click {string} button in modal window', function (button) {
@@ -29,13 +29,18 @@ When('I enter {string} to {string} field', function (text, field) {
   return page('doctors').addDoctorModal.input(field).setValue(text);
 });
 
-When('I click on {string} doctor card name', function (id) {
+When(/^I click on (\d+) doctor card name$/, function(id) {
   const newDoc = page('doctors').specialistCard(id).name;
   return newDoc.click();
 });
 
-When('I click on delete button in doctor details tab', function () {
-  return page('doctors').doctorDetails.deleteDoctorBtn.click();
+// When('I click on {int} doctor card name', function (id) {
+//   const newDoc = page('doctors').specialistCard(id).name;
+//   return newDoc.click();
+// });
+
+When('I click on {string} button in doctor details tab', function (button) {
+  return page('doctors').doctorDetails.button(button).click();
 });
 
 When('I click {string} button in delete confirmation pop-up', function (button) {

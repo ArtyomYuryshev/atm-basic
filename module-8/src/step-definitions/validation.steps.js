@@ -21,9 +21,8 @@ Then(/^modal window should( not)? be displayed$/, async param => {
 //   return compareText(pageTitle, titleText, shouldBeParam, compareParameter);
 // });
 
-Then('{string} card name should {string} {string}', async function (id, shouldBeParam, cardName) {
+Then('{int} card name should {string} {string}', async function (id, shouldBeParam, cardName) {
   const docName = await page('doctors').specialistCard(id).name.getText();
-  // is that possible to get last id 'automaticaly'?
   return compareText(docName, cardName, shouldBeParam);
 });
 

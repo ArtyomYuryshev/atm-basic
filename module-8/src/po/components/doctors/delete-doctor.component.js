@@ -6,12 +6,11 @@ class DeleteDocModal extends BaseComponent {
   }
 
   get okBtn() {
-    return this.rootEl.$('ejs-dialog.e-popup-open button.e-primary');
+    return this.rootEl.$('button.e-primary');
   }
 
   get cancelBtn() {
-    return this.rootEl.$('ejs-dialog.e-popup-open button:nth-child(2)');
-    // i don't see the way to don't use 'nth-child(2)'
+    return this.rootEl.$('button.e-btn:not(.e-primary)');
   }
 
   /**
