@@ -20,3 +20,13 @@ Then(/^modal window should( not)? be displayed$/, async param => {
 //   const pageTitle = await browser.getTitle();
 //   return compareText(pageTitle, titleText, shouldBeParam, compareParameter);
 // });
+
+Then('{int} card name should {string} {string}', async function (id, shouldBeParam, cardName) {
+  const docName = await page('doctors').specialistCard(id).name.getText();
+  return compareText(docName, cardName, shouldBeParam);
+});
+
+Then('should open page with name of doctor {string} {string}', async function (shouldBeParam, expectedName) {
+  const actualName = await page('doctors').doctorDetails.docName.getText();
+  return compareText(actualName, expectedName, shouldBeParam);
+});
