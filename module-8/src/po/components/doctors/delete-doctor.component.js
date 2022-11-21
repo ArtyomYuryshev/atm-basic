@@ -6,11 +6,11 @@ class DeleteDocModal extends BaseComponent {
   }
 
   get okBtn() {
-    return this.rootEl.$('button.e-primary');
+    return this.rootEl.$('button=Ok');
   }
 
   get cancelBtn() {
-    return this.rootEl.$('button.e-btn:not(.e-primary)');
+    return this.rootEl.$('button=Cancel');
   }
 
   /**
