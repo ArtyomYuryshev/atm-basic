@@ -4,6 +4,8 @@ const SideMenu = require('./common/sidemenu.component');
 const AddDoctorModal = require('./doctors/add-doctor.component');
 const DoctorListHeader = require('./doctors/list-header.component');
 const SpecialistCard = require('./doctors/specialist-card.component');
+const DoctorDetails = require('./doctors/doctor-details.component');
+const DeleteDocModal = require('./doctors/delete-doctor.component');
 
 module.exports = {
   Header,
@@ -11,4 +13,6 @@ module.exports = {
   AddDoctorModal,
   DoctorListHeader,
   SpecialistCard,
+  DoctorDetails,
+  DeleteDocModal,
 };
