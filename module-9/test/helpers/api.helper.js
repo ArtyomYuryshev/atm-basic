@@ -21,5 +21,5 @@ const sendRequest = async (url, data = null, method = 'get') => {
 };
 
 module.exports = {
-  sendRequest
+  sendRequest,
 };
