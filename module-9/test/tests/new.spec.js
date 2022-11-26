@@ -29,6 +29,11 @@ describe('API Test Suite', () => {
     expect(FirstBody).to.equal(ferstElem.body);
   });
 
+  it('get() non-existent post', async () => {
+    const response = await sendRequest('posts/777');
+    expect(response.status).to.equal(404);
+  });
+
   it('get() (filter) 1st post', async () => {
     const response = await sendRequest('posts?id=1');
 
@@ -68,9 +73,14 @@ describe('API Test Suite', () => {
     expect(body).to.equal(testData.body);
   });
 
+  it('put() (update) non-existent entity', async () => {
+    const response = await sendRequest('posts/404', testData, 'put');
+    // I think there is should be 404 instead of 500 but as is
+    expect(response.status).to.equal(500);
+  });
+
   it('delete() first entity', async () => {
     const response = await sendRequest('posts/1', testData, 'delete');
-
     // looks strange but server return 200 instead of 204 (checked in Postman)
     expect(response.status).to.equal(200);
     expect(response.userId).to.equal(undefined);
