@@ -29,7 +29,7 @@ describe('API Test Suite', () => {
     expect(FirstBody).to.equal(ferstElem.body);
   });
 
-  it('get() (filter) posts of 13th post', async () => {
+  it('get() (filter) 1st post', async () => {
     const response = await sendRequest('posts?id=1');
 
     const filterUserId = response.data.userId;
