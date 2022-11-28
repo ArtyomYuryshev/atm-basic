@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const { sendRequest } = require('../helpers/api.helper');
-const newData = require('../config/newData.json');
-const ferstElem = require('../config/firstElementData.json');
-const filter = require('../config/filteredData.json');
-const allData = require('../config/allData.json');
+const newData = require('../config/testData/newData.json');
+const ferstElem = require('../config/testData/firstElementData.json');
+const filter = require('../config/testData/filteredData.json');
+const allData = require('../config/testData/allData.json');
 
 describe('API Test Suite', () => {
   let userId;
