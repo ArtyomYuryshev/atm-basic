@@ -20,14 +20,8 @@ describe('API Test Suite', () => {
   it('get() first post', async () => {
     const response = await sendRequest('posts/1');
 
-    const firstUserId = response.data.userId;
-    const firstTitle = response.data.title;
-    const FirstBody = response.data.body;
-
     expect(response.status).to.equal(200);
-    expect(firstUserId).to.equal(ferstElem.userId);
-    expect(firstTitle).to.equal(ferstElem.title);
-    expect(FirstBody).to.equal(ferstElem.body);
+    expect(response.data).to.eql(ferstElem);
   });
 
   it('get() non-existent post', async () => {
