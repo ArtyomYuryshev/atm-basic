@@ -1,8 +1,9 @@
 const { expect } = require('chai');
 const { sendRequest } = require('../helpers/api.helper');
-const testData = require('../config/newData.json');
+const newData = require('../config/newData.json');
 const ferstElem = require('../config/firstElementData.json');
 const filter = require('../config/filteredData.json');
+const allData = require('../config/allData.json');
 
 describe('API Test Suite', () => {
   let userId;
@@ -13,7 +14,7 @@ describe('API Test Suite', () => {
     const response = await sendRequest('posts');
 
     expect(response.status).to.equal(200);
-    expect(response.data[0].id).to.equal(1);
+    expect(response.data).to.eql(allData);
   });
 
   it('get() first post', async () => {
@@ -32,59 +33,47 @@ describe('API Test Suite', () => {
   it('get() non-existent post', async () => {
     const response = await sendRequest('posts/777');
     expect(response.status).to.equal(404);
+    expect(response.statusText).to.equal('Not Found');
   });
 
   it('get() (filter) 1st post', async () => {
     const response = await sendRequest('posts?id=1');
 
-    const filterUserId = response.data.userId;
-    const filterTitle = response.data.title;
-    const filterBody = response.data.body;
-
     expect(response.status).to.equal(200);
-    expect(filterUserId).to.equal(filter.data.userId);
-    expect(filterTitle).to.equal(filter.data.title);
-    expect(filterBody).to.equal(filter.data.body);
+    expect(response.data).to.eql(filter);
   });
 
   it('post() new entity', async () => {
-    const response = await sendRequest('posts', testData, 'post');
-
-    userId = response.data.userId;
-    title = response.data.title;
-    body = response.data.body;
+    const response = await sendRequest('posts', newData, 'post');
 
     expect(response.status).to.equal(201);
-    expect(userId).to.equal(testData.userId);
-    expect(title).to.equal(testData.title);
-    expect(body).to.equal(testData.body);
+    expect(response.data).to.eql(newData);
   });
 
   it('put() (update) first entity', async () => {
-    const response = await sendRequest('posts/1', testData, 'put');
+    const response = await sendRequest('posts/1', newData, 'put');
 
     userId = response.data.userId;
     title = response.data.title;
     body = response.data.body;
 
     expect(response.status).to.equal(200);
-    expect(userId).to.equal(testData.userId);
-    expect(title).to.equal(testData.title);
-    expect(body).to.equal(testData.body);
+    expect(userId).to.equal(newData.userId);
+    expect(title).to.equal(newData.title);
+    expect(body).to.equal(newData.body);
+    // expect(response.data).to.eql(newData);
   });
 
   it('put() (update) non-existent entity', async () => {
-    const response = await sendRequest('posts/404', testData, 'put');
+    const response = await sendRequest('posts/404', newData, 'put');
     // I think there is should be 404 instead of 500 but as is
     expect(response.status).to.equal(500);
+    expect(response.statusText).to.equal('Internal Server Error');
   });
 
   it('delete() first entity', async () => {
-    const response = await sendRequest('posts/1', testData, 'delete');
+    const response = await sendRequest('posts/1', '', 'delete');
     // looks strange but server return 200 instead of 204 (checked in Postman)
     expect(response.status).to.equal(200);
-    expect(response.userId).to.equal(undefined);
-    expect(response.title).to.equal(undefined);
-    expect(response.body).to.equal(undefined);
   });
 });
