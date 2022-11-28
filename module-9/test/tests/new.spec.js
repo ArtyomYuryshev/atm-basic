@@ -6,9 +6,6 @@ const filter = require('../config/testData/filteredData.json');
 const allData = require('../config/testData/allData.json');
 
 describe('API Test Suite', () => {
-  let userId;
-  let title;
-  let body;
 
   it('get() all posts', async () => {
     const response = await sendRequest('posts');
@@ -47,15 +44,13 @@ describe('API Test Suite', () => {
   it('put() (update) first entity', async () => {
     const response = await sendRequest('posts/1', newData, 'put');
 
-    userId = response.data.userId;
-    title = response.data.title;
-    body = response.data.body;
+    delete response.data.id;
+    // console.log(response.data)
+    delete newData.id;
+    // console.log(newData)
 
     expect(response.status).to.equal(200);
-    expect(userId).to.equal(newData.userId);
-    expect(title).to.equal(newData.title);
-    expect(body).to.equal(newData.body);
-    // expect(response.data).to.eql(newData);
+    expect(response.data).to.eql(newData);
   });
 
   it('put() (update) non-existent entity', async () => {
