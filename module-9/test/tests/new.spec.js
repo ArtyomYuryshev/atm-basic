@@ -6,7 +6,6 @@ const filter = require('../config/testData/filteredData.json');
 const allData = require('../config/testData/allData.json');
 
 describe('API Test Suite', () => {
-
   it('get() all posts', async () => {
     const response = await sendRequest('posts');
 
